@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  web:
+    container_name: web
+    build:
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    hostname: demo.com
+    volumes:
+      - ./clone/emsV2:/var/www/html/
+    ports:
+      - 8000:80
+    environment:
+        DB_SERVER: db
+        DB_NAME: mysql
+        DB_USER: root
+        DB_PASS: root
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: db
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+    ports:
+        - "9906:3306"
