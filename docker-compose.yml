@@ -13,7 +13,7 @@ services:
       - 8000:80
     environment:
         DB_SERVER: db
-        DB_NAME: mysql
+        DB_NAME: db
         DB_USER: root
         DB_PASS: root
   db:
